@@ -1,0 +1,12 @@
+# Node.js Dependencies
+node_modules
+dist
+
+# Environment Files
+.env
+.env.local
+
+# Prisma Files
+generated
+/generated/prisma
+/generated/prisma
