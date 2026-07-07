@@ -1,0 +1,31 @@
+model User {
+  id                String      @id @default(uuid()) @db.Uuid
+
+  fullName          String      @db.VarChar(150) @map("full_name")
+  email             String      @unique @db.VarChar(255)
+  phone             String      @unique @db.VarChar(20)
+  passwordHash      String      @db.VarChar(255) @map("password_hash")
+  status            UserStatus  @default(ACTIVE)
+
+  profileImage      String?     @db.Text @map("profile_image")
+  address           String?     @db.Text
+  city              String?     @db.VarChar(100)
+
+  latitude          Decimal?    @db.Decimal(10, 8)
+  longitude         Decimal?    @db.Decimal(11, 8)
+
+
+  emailVerifiedAt   DateTime?   @map("email_verified_at")
+  phoneVerifiedAt   DateTime?   @map("phone_verified_at")
+  lastLoginAt       DateTime?   @map("last_login_at")
+
+  createdAt         DateTime    @default(now()) @map("created_at")
+  updatedAt         DateTime    @updatedAt @map("updated_at")
+  deletedAt         DateTime?   @map("deleted_at")
+
+  // Relations
+  roleId            String      @db.Uuid @map("role_id")
+  role              Role        @relation(fields: [roleId], references: [id])
+
+  @@map("users")
+}

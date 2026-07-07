@@ -1,0 +1,6 @@
+enum UserStatus {
+  ACTIVE       // User can use the system
+  INACTIVE     // User deactivated own account
+  SUSPENDED    // Admin suspended account
+  BANNED      // Admin banned account
+}
