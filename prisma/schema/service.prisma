@@ -1,0 +1,32 @@
+model Service {
+  // Primary Key
+  id String @id @default(uuid()) @db.Uuid
+
+  // Foreign Keys
+  technicianId String @map("technician_id") @db.Uuid
+  categoryId   String @map("category_id") @db.Uuid
+
+  // Business Fields
+  title       String  @db.VarChar(200)
+  description String? @db.Text
+
+  price             Decimal     @db.Decimal(10, 2)
+  pricingType       PricingType @map("pricing_type")
+  //   Duration in minutes
+  estimatedDuration Int         @map("estimated_duration")
+
+  // Status
+  status ServiceStatus @default(ACTIVE)
+
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  technician TechnicianProfile @relation(fields: [technicianId], references: [id])
+  category   Category          @relation(fields: [categoryId], references: [id])
+
+  bookings Booking[]
+
+  @@map("services")
+}

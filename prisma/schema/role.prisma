@@ -1,14 +1,17 @@
 model Role {
-  id          String   @id @default(uuid()) @db.Uuid
+  // Primary Key
+  id String @id @default(uuid()) @db.Uuid
 
-  name        String   @unique @db.VarChar(50)
-  description String?  @db.Text
+  // Business Fields
+  name        String  @unique @db.VarChar(50)
+  description String? @db.Text
 
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  users       User[]
+  users User[]
 
   @@map("roles")
 }

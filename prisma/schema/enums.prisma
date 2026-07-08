@@ -1,6 +1,62 @@
+// User Enums
 enum UserStatus {
-  ACTIVE       // User can use the system
-  INACTIVE     // User deactivated own account
-  SUSPENDED    // Admin suspended account
-  BANNED      // Admin banned account
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  BANNED
+}
+
+// Technician Profile Enums
+enum AvailabilityStatus {
+  ONLINE
+  OFFLINE
+  BUSY
+}
+
+enum VerificationStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+// Category Enums
+enum CategoryStatus {
+  ACTIVE
+  INACTIVE
+}
+
+// Service Enums
+enum PricingType {
+  FIXED
+  HOURLY
+}
+
+enum ServiceStatus {
+  ACTIVE
+  INACTIVE
+}
+
+// Booking Enums
+enum BookingStatus {
+  PENDING
+  ACCEPTED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+// Payment Enums
+enum PaymentMethod {
+  CARD
+  CASH
+  MOBILE_BANKING
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
 }
