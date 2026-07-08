@@ -1,0 +1,46 @@
+model Booking {
+  // Primary Key
+  id String @id @default(uuid()) @db.Uuid
+
+  // Foreign Keys
+  customerId   String  @map("customer_id") @db.Uuid
+  technicianId String  @map("technician_id") @db.Uuid
+  serviceId    String  @map("service_id") @db.Uuid
+  cancelledBy  String? @map("cancelled_by") @db.Uuid
+
+  // Business Fields
+  bookingNumber  String   @unique @map("booking_number") @db.VarChar(50)
+  bookingDate    DateTime @map("booking_date") @db.Date
+  scheduledStart DateTime @map("scheduled_start")
+  scheduledEnd   DateTime @map("scheduled_end")
+  serviceAddress String   @map("service_address") @db.Text
+
+  // Location
+  latitude  Decimal? @db.Decimal(10, 8)
+  longitude Decimal? @db.Decimal(11, 8)
+
+  // Financial
+  totalAmount Decimal @map("total_amount") @db.Decimal(10, 2)
+
+  // Status
+  status BookingStatus @default(PENDING)
+
+  // Additional Information
+  notes              String?   @db.Text
+  cancellationReason String?   @map("cancellation_reason") @db.Text
+  completedAt        DateTime? @map("completed_at")
+
+  // Timestamps
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  customer        User     @relation("CustomerBookings", fields: [customerId], references: [id])
+  technician      User     @relation("TechnicianBookings", fields: [technicianId], references: [id])
+  service         Service  @relation(fields: [serviceId], references: [id])
+  cancelledByUser User?    @relation("CancelledBookings", fields: [cancelledBy], references: [id])
+  payment         Payment?
+  review          Review?
+
+  @@map("bookings")
+}
