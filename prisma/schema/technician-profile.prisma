@@ -1,30 +1,30 @@
 model TechnicianProfile {
   // Primary Key
-  id                  String               @id @default(uuid()) @db.Uuid
+  id String @id @default(uuid()) @db.Uuid
 
   // Foreign Key
-  userId              String               @unique @db.Uuid @map("user_id")
+  userId String @unique @map("user_id") @db.Uuid
 
   // Business Fields
-  bio                 String?              @db.Text
-  yearsOfExperience   Int                  @db.SmallInt @map("years_of_experience")
+  bio               String? @db.Text
+  yearsOfExperience Int     @map("years_of_experience") @db.SmallInt
 
   // Status
-  availabilityStatus  AvailabilityStatus   @default(OFFLINE) @map("availability_status")
-  verificationStatus  VerificationStatus   @default(PENDING) @map("verification_status")
+  availabilityStatus AvailabilityStatus @default(OFFLINE) @map("availability_status")
+  verificationStatus VerificationStatus @default(PENDING) @map("verification_status")
 
   // Statistics
-  averageRating       Decimal              @default(0.00) @db.Decimal(3, 2) @map("average_rating")
-  totalReviews        Int                  @default(0) @map("total_reviews")
-  totalCompletedJobs  Int                  @default(0) @map("total_completed_jobs")
+  averageRating      Decimal @default(0.00) @map("average_rating") @db.Decimal(3, 2)
+  totalReviews       Int     @default(0) @map("total_reviews")
+  totalCompletedJobs Int     @default(0) @map("total_completed_jobs")
 
   // Timestamps
-  createdAt           DateTime             @default(now()) @map("created_at")
-  updatedAt           DateTime             @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  user                User                 @relation(fields: [userId], references: [id])
-  services            Service[]
+  user     User      @relation(fields: [userId], references: [id])
+  services Service[]
 
   @@map("technician_profiles")
 }

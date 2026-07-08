@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "../src/lib/prisma";
 import { seedRoles } from "./seeds/role.seed";
-
-const prisma = new PrismaClient();
 
 async function main() {
   await seedRoles(prisma);
