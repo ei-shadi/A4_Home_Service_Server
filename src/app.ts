@@ -5,6 +5,7 @@ import cors from "cors";
 import config from "./config";
 import { authRoute } from "./module/auth/auth.route";
 import { globalErrorHandler } from './middleware/globalErrorHandler';
+import { userRoute } from './module/user/user.route';
 
 
 const app : Application = express();
@@ -31,6 +32,9 @@ app.get("/", (req: Request, res: Response) => {
 
 // Auth Routes
 app.use("/api/auth", authRoute)
+
+// User Routes
+app.use("/api/users", userRoute);
 
 // Not Found Middleware
 app.use(notFound);

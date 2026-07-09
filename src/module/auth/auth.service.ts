@@ -92,59 +92,43 @@ const loginUserIntoDB = async (payload: ILoginUserPayload) => {
     throw new Error("Please provide both email and password");
   }
 
-  // Find the user by email
-  const user = await prisma.user.findUniqueOrThrow({
-    where: {
-      email,
-    },
-  });
+ const user = await prisma.user.findUniqueOrThrow({
+  where: {
+    email,
+  },
+  include: {
+    role: true,
+  },
+});
 
-  // If user Status is Banned, throw an error
-  if (user.status === "BANNED") {
-    throw new Error(
-      "Sorry, your account has been banned. Please contact support for assistance.",
-    );
-  }
+if (user.status === "BANNED") {
+  throw new Error("Your account has been blocked. Please contact support.");
+}
 
-  // Users Role Validation
-  const roleData = await prisma.role.findUnique({
-    where: {
-      id: user.roleId,
-    },
-  });
+const isPasswordMatched = await bcrypt.compare(
+  password,
+  user.passwordHash
+);
 
-  // If the user role does not exist, throw an error
-  if (!roleData) {
-    throw new Error("User role not found");
-  }
+if (!isPasswordMatched) {
+  throw new Error("Invalid Password");
+}
 
-  // Compare the provided password with the hashed password in the database
-  const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+const jwtPayload = {
+  id: user.id,
+};
 
-  if (!isPasswordValid) {
-    throw new Error("Invalid password");
-  }
+const accessToken = jwtUtils.createToken(
+  jwtPayload,
+  config.jwt_access_secret,
+  config.jwt_access_expires_in as SignOptions
+);
 
-  // JWT token generation Logic
-  const jwtPayload = {
-    id: user.id,
-    name: user.name,
-    email: user.email,
-    role: roleData.name,
-  };
-
-  // Generate JWT Access Token
-  const accessToken = jwtUtils.createToken(
-    jwtPayload, 
-    config.jwt_access_secret, 
-    config.jwt_access_expires_in as SignOptions);
-
-  // Generate JWT Refresh Token
-  const refreshToken = jwtUtils.createToken(
-    jwtPayload,
-    config.jwt_refresh_secret,
-    config.jwt_refresh_expires_in as SignOptions
-  );
+const refreshToken = jwtUtils.createToken(
+  jwtPayload,
+  config.jwt_refresh_secret,
+  config.jwt_refresh_expires_in as SignOptions
+);
 
   return {
     accessToken,
