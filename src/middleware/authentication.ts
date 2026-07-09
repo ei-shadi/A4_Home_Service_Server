@@ -5,6 +5,7 @@ import config from "../config";
 import { catchAsync } from "../shared/utils/catchAsync";
 import { jwtUtils } from "../shared/utils/jwt";
 
+// User Interface Declaration for Express Request
 declare global {
   namespace Express {
     interface Request {
@@ -18,7 +19,8 @@ declare global {
   }
 }
 
-export const auth = catchAsync(
+// Authentication Middleware
+export const authenticate = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const token = req.cookies.accessToken
       ? req.cookies.accessToken

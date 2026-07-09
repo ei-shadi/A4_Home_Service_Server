@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
+// Authorization Middleware
 export const authorize =
   (...roles: string[]) =>
   (req: Request, res: Response, next: NextFunction) => {
