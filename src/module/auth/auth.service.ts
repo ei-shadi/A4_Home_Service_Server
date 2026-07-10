@@ -75,15 +75,23 @@ const registerUserIntoDB = async (payload: IRegisterUserPayload) => {
       phone,
       passwordHash: hashedPassword,
     },
-    omit: {
-      id: true,
-      roleId: true,
-      passwordHash: true,
-      deletedAt: true,
+    select: {
+      name: true,
+      email: true,
+      phone: true,
+      profileImage: true,
+      role: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
-  return user;
+  return {
+    ...user,
+    role: user.role.name,
+  };
 };
 
 // Login User Into DB
@@ -95,47 +103,44 @@ const loginUserIntoDB = async (payload: ILoginUserPayload) => {
     throw new Error("Please provide both email and password");
   }
 
- const user = await prisma.user.findUniqueOrThrow({
-  where: {
-    email,
-  },
-  include: {
-    role: true,
-  },
-});
+  const user = await prisma.user.findUniqueOrThrow({
+    where: {
+      email,
+    },
+    include: {
+      role: true,
+    },
+  });
 
-if (user.status === "BANNED") {
-  throw new Error("Your account has been blocked. Please contact support.");
-}
+  if (user.status === "BANNED") {
+    throw new Error("Your account has been blocked. Please contact support.");
+  }
 
-const isPasswordMatched = await bcrypt.compare(
-  password,
-  user.passwordHash
-);
+  const isPasswordMatched = await bcrypt.compare(password, user.passwordHash);
 
-if (!isPasswordMatched) {
-  throw new Error("Invalid Password");
-}
+  if (!isPasswordMatched) {
+    throw new Error("Invalid Password");
+  }
 
-const jwtPayload = {
-  id: user.id,
-};
+  const jwtPayload = {
+    id: user.id,
+  };
 
-const accessToken = jwtUtils.createToken(
-  jwtPayload,
-  config.jwt_access_secret,
-  config.jwt_access_expires_in as SignOptions
-);
+  const accessToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_access_secret,
+    config.jwt_access_expires_in as SignOptions,
+  );
 
-const refreshToken = jwtUtils.createToken(
-  jwtPayload,
-  config.jwt_refresh_secret,
-  config.jwt_refresh_expires_in as SignOptions
-);
+  const refreshToken = jwtUtils.createToken(
+    jwtPayload,
+    config.jwt_refresh_secret,
+    config.jwt_refresh_expires_in as SignOptions,
+  );
 
   return {
     accessToken,
-    refreshToken
+    refreshToken,
   };
 };
 
