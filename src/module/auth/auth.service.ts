@@ -76,7 +76,10 @@ const registerUserIntoDB = async (payload: IRegisterUserPayload) => {
       passwordHash: hashedPassword,
     },
     omit: {
+      id: true,
+      roleId: true,
       passwordHash: true,
+      deletedAt: true,
     },
   });
 
