@@ -67,25 +67,40 @@ const registerUserIntoDB = async (payload: IRegisterUserPayload) => {
   );
 
   // Create the user
-  const user = await prisma.user.create({
-    data: {
-      roleId: roleData.id,
-      name,
-      email,
-      phone,
-      passwordHash: hashedPassword,
-    },
-    select: {
-      name: true,
-      email: true,
-      phone: true,
-      profileImage: true,
-      role: {
-        select: {
-          name: true,
+  const user = await prisma.$transaction(async (tx) => {
+    // Create User
+    const newUser = await tx.user.create({
+      data: {
+        roleId: roleData.id,
+        name,
+        email,
+        phone,
+        passwordHash: hashedPassword,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phone: true,
+        profileImage: true,
+        role: {
+          select: {
+            name: true,
+          },
         },
       },
-    },
+    });
+
+    // Create Technician Profile if role is TECHNICIAN
+    if (roleData.name === USER_ROLE.TECHNICIAN) {
+      await tx.technicianProfile.create({
+        data: {
+          userId: newUser.id,
+        },
+      });
+    }
+
+    return newUser;
   });
 
   return {

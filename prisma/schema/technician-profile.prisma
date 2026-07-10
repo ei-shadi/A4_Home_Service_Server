@@ -7,7 +7,7 @@ model TechnicianProfile {
 
   // Business Fields
   bio               String? @db.Text
-  yearsOfExperience Int     @map("years_of_experience") @db.SmallInt
+  yearsOfExperience Int?     @map("years_of_experience") @db.SmallInt
 
   // Status
   availabilityStatus AvailabilityStatus @default(OFFLINE) @map("availability_status")

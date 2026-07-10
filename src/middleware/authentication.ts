@@ -4,6 +4,7 @@ import { prisma } from "../lib/prisma";
 import config from "../config";
 import { catchAsync } from "../shared/utils/catchAsync";
 import { jwtUtils } from "../shared/utils/jwt";
+import { USER_ROLE } from "../module/auth/auth.constant";
 
 // User Interface Declaration for Express Request
 declare global {
@@ -13,7 +14,7 @@ declare global {
         id: string;
         name: string;
         email: string;
-        role: string;
+        role: (typeof USER_ROLE)[keyof typeof USER_ROLE];
       };
     }
   }
@@ -61,7 +62,7 @@ export const authenticate = catchAsync(
       id: user.id,
       name: user.name,
       email: user.email,
-      role: user.role.name,
+      role: user.role.name as (typeof USER_ROLE)[keyof typeof USER_ROLE],
     };
 
     next();

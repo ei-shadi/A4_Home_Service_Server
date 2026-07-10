@@ -5,7 +5,7 @@ import httpStatus from "http-status";
 import { userService } from "./user.service";
 
 const getMyProfile = catchAsync(async (req: Request, res: Response) => {
-  const profile = await userService.getMyProfileFromDB(req.user?.id as string);
+  const profile = await userService.getMyProfileFromDB(req.user!);
 
   sendResponse(res, {
     success: true,
