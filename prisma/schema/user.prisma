@@ -6,7 +6,7 @@ model User {
   roleId String @map("role_id") @db.Uuid
 
   // Basic Information
-  name     String  @db.VarChar(150)
+  name         String @db.VarChar(150)
   email        String @unique @db.VarChar(255)
   phone        String @unique @db.VarChar(20)
   passwordHash String @map("password_hash") @db.VarChar(255)
@@ -32,11 +32,11 @@ model User {
   deletedAt DateTime? @map("deleted_at")
 
   // Relations
-  role               Role               @relation(fields: [roleId], references: [id])
-  technicianProfile  TechnicianProfile?
-  customerBookings   Booking[]          @relation("CustomerBookings")
-  technicianBookings Booking[]          @relation("TechnicianBookings")
-  cancelledBookings  Booking[]          @relation("CancelledBookings")
+  role              Role               @relation(fields: [roleId], references: [id])
+  technicianProfile TechnicianProfile?
+
+  customerBookings  Booking[] @relation("CustomerBookings")
+  cancelledBookings Booking[] @relation("CancelledBookings")
 
   @@map("users")
 }

@@ -6,8 +6,9 @@ model TechnicianProfile {
   userId String @unique @map("user_id") @db.Uuid
 
   // Business Fields
-  bio               String? @db.Text
-  yearsOfExperience Int?     @map("years_of_experience") @db.SmallInt
+  bio                   String? @db.Text
+  yearsOfExperience     Int?    @map("years_of_experience") @db.SmallInt
+  experienceDescription String? @map("experience_description") @db.Text
 
   // Status
   availabilityStatus AvailabilityStatus @default(OFFLINE) @map("availability_status")
@@ -23,8 +24,9 @@ model TechnicianProfile {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   // Relations
-  user     User      @relation(fields: [userId], references: [id])
-  services Service[]
+  user User @relation(fields: [userId], references: [id])
+
+  technicianServices TechnicianService[]
 
   @@map("technician_profiles")
 }

@@ -1,20 +1,24 @@
-import { sendResponse } from "../../shared/utils/sendResponse";
-import { catchAsync } from "../../shared/utils/catchAsync";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { userService } from "./technician.service";
 
-const getMyProfile = catchAsync(async (req: Request, res: Response) => {
-  const profile = await userService.getMyProfileFromDB(req.user?.id as string);
+import { catchAsync } from "../../shared/utils/catchAsync";
+import { sendResponse } from "../../shared/utils/sendResponse";
+import { technicianService } from "./technician.service";
+
+const updateProfile = catchAsync(async (req: Request, res: Response) => {
+  const result = await technicianService.updateProfileIntoDB(
+    req.user!.id,
+    req.body
+  );
 
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "User profile fetched successfully",
-    data: profile,
+    message: "Profile updated successfully",
+    data: result,
   });
 });
 
-export const userController = {
-  getMyProfile,
+export const technicianController = {
+  updateProfile,
 };

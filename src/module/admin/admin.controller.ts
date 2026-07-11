@@ -1,20 +1,24 @@
-import { sendResponse } from "../../shared/utils/sendResponse";
-import { catchAsync } from "../../shared/utils/catchAsync";
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { userService } from "./admin.service";
 
-const getMyProfile = catchAsync(async (req: Request, res: Response) => {
-  const profile = await userService.getMyProfileFromDB(req.user?.id as string);
+import { catchAsync } from "../../shared/utils/catchAsync";
+import { sendResponse } from "../../shared/utils/sendResponse";
+import { adminService } from "./admin.service";
+
+const updateCategory = catchAsync(async (req: Request, res: Response) => {
+  const result = await adminService.updateCategoryIntoDB(
+    req.params.id as string,
+    req.body
+  );
 
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "User profile fetched successfully",
-    data: profile,
+    message: "Category updated successfully.",
+    data: result,
   });
 });
 
-export const userController = {
-  getMyProfile,
+export const adminController = {
+  updateCategory,
 };

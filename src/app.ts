@@ -6,6 +6,8 @@ import config from "./config";
 import { authRoute } from "./module/auth/auth.route";
 import { globalErrorHandler } from './middleware/globalErrorHandler';
 import { userRoute } from './module/user/user.route';
+import { technicianRoute } from './module/technician/technician.route';
+import { adminRoute } from './module/admin/admin.route';
 
 
 const app : Application = express();
@@ -32,9 +34,14 @@ app.get("/", (req: Request, res: Response) => {
 
 // Auth Routes
 app.use("/api/auth", authRoute)
-
+// Admin Routes
+app.use("/api/admin", adminRoute);
 // User Routes
 app.use("/api/users", userRoute);
+// Technician Routes
+app.use("/api/technician", technicianRoute);
+// Services Routes
+// app.use("/api/services", userRoute);
 
 // Not Found Middleware
 app.use(notFound);

@@ -1,11 +1,13 @@
 import { Router } from "express";
-import { userController } from "./admin.controller";
 import { authenticate } from "../../middleware/authentication";
+import { authorize } from "../../middleware/authorization";
+import { USER_ROLE } from "../auth/auth.constant";
+import { adminController } from "./admin.controller";
 
 const route = Router();
 
 
-route.get("/", authenticate, userController.getMyProfile);
+route.put("/categories", authenticate, authorize(USER_ROLE.ADMIN), adminController.updateCategory);
 
 
-export const userRoute = route;
+export const adminRoute = route;

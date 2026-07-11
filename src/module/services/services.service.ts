@@ -1,30 +1,26 @@
 import { prisma } from "../../lib/prisma";
 
-const getMyProfileFromDB = async (userId: string) => {
-  const user = await prisma.user.findUniqueOrThrow({
+
+const getAllServicesFromDB = async (query: Record<string, unknown>) => {
+  const services = await prisma.service.findMany({
     where: {
-      id: userId,
-    },
-    omit: {
-      roleId: true,
-      passwordHash: true,
-      deletedAt: true,
+      status: "ACTIVE",
     },
     include: {
-      role: {
+      category: true,
+      technician: {
         select: {
+          id: true,
           name: true,
+          city: true,
         },
       },
     },
   });
 
-  return {
-    ...user,
-    role: user.role.name,
-  };
+  return services;
 };
 
-export const userService = {
-  getMyProfileFromDB,
+export const servicesService = {
+  getAllServicesFromDB,
 };

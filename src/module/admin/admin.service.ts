@@ -1,5 +1,7 @@
 import { prisma } from "../../lib/prisma";
+import { IUpdateCategory, TCategoryStatus } from "./admin.interface";
 
+// Get Admin Profile
 export const getAdminProfileFromDB = async (userId: string) => {
   const admin = await prisma.user.findUniqueOrThrow({
     where: {
@@ -25,6 +27,54 @@ export const getAdminProfileFromDB = async (userId: string) => {
   };
 };
 
-export const userService = {
+// Update Category
+const updateCategoryIntoDB = async (
+  id: string,
+  payload: IUpdateCategory
+) => {
+  const { name, icon, description, status } = payload;
 
+  // Check payload
+  if (Object.keys(payload).length === 0) {
+    throw new Error("Please provide at least one field to update.");
+  }
+
+  // Normalize status
+  const normalizedStatus = status
+    ? (status.toUpperCase() as TCategoryStatus)
+    : undefined;
+
+  // Check duplicate category name
+  if (name) {
+    const isNameExist = await prisma.category.findFirst({
+      where: {
+        name,
+        NOT: {
+          id,
+        },
+      },
+    });
+
+    if (isNameExist) {
+      throw new Error("Category name already exists.");
+    }
+  }
+
+  // Update category
+  const updatedCategory = await prisma.category.update({
+    where: { id },
+    data: {
+      name,
+      icon,
+      description,
+      status: normalizedStatus,
+    },
+  });
+
+  return updatedCategory;
+};
+
+
+export const adminService = {
+  updateCategoryIntoDB,
 };
