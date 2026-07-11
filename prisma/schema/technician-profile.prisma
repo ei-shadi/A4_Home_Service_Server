@@ -11,7 +11,7 @@ model TechnicianProfile {
   experienceDescription String? @map("experience_description") @db.Text
 
   // Status
-  availabilityStatus AvailabilityStatus @default(OFFLINE) @map("availability_status")
+  availabilityStatus AvailabilityStatus @default(ONLINE) @map("availability_status")
   verificationStatus VerificationStatus @default(PENDING) @map("verification_status")
 
   // Statistics

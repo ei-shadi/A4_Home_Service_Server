@@ -2,6 +2,7 @@ import { prisma } from "../../lib/prisma";
 import { getAdminProfileFromDB } from "../admin/admin.service";
 import { USER_ROLE } from "../auth/auth.constant";
 import { getTechnicianProfileFromDB } from "../technician/technician.service";
+
 import { TUser } from "./user.interface";
 
 
@@ -46,7 +47,7 @@ const getMyProfileFromDB = async (user: TUser) => {
       throw new Error("Invalid role");
   }
 };
-
+ 
 export const userService = {
   getMyProfileFromDB,
 };

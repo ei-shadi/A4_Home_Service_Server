@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { servicesController } from "../services/services.controller";
+import { userController } from "./user.controller";
+import { authenticate } from "../../middleware/authentication";
 
 const route = Router();
 
 
-route.get("/", servicesController.getAllServices);
+route.get("/me", authenticate, userController.getMyProfile);
 
 
 export const userRoute = route;
