@@ -1,4 +1,5 @@
 import { UserStatus } from "@prisma/client";
+import { ServiceStatus } from "@prisma/client";
 
 export interface ICategory {
   name: string;
@@ -7,8 +8,14 @@ export interface ICategory {
   status?: TCategoryStatus;
 }
 
-export type TCategoryStatus = "ACTIVE" | "INACTIVE";
+export interface IService {
+  categoryId: string;
+  title: string;
+  description?: string;
+  status?: ServiceStatus;
+}
 
+export type TCategoryStatus = "ACTIVE" | "INACTIVE";
 
 export interface IUpdateUserStatus {
   status: UserStatus;

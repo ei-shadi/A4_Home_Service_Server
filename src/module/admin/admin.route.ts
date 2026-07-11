@@ -30,13 +30,21 @@ route.get(
   adminController.getAllCategories,
 );
 
-// Create Category
+// Create Category Api
 route.post(
   "/categories",
   authenticate,
   authorize(USER_ROLE.ADMIN),
   adminController.createCategory,
 );
+
+// Create Service Api
+route.post(
+  "/services",
+  authenticate,
+  authorize(USER_ROLE.ADMIN),
+  adminController.createService,
+)
 
 // Update User Status Api
 route.patch(

@@ -40,6 +40,35 @@ const getAllCategories = catchAsync(async (req: Request, res: Response) => {
   });
 }) 
 
+// Create Category
+const createCategory = catchAsync(async (req: Request, res: Response) => {
+  const result = await adminService.createCategoryIntoDB(
+    req.body
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Category created successfully.",
+    data: result,
+  });
+});
+
+// Create Service
+const createService = catchAsync(async (req: Request, res: Response) => {
+  const result = await adminService.createServiceIntoDB(
+    req.body
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Service created successfully.",
+    data: result,
+  });
+});
+
+
 // Update User Status
 const updateUserStatus = catchAsync(async (req, res) => {
   const result = await adminService.updateUserStatusIntoDB(
@@ -55,24 +84,12 @@ const updateUserStatus = catchAsync(async (req, res) => {
   });
 });
 
-// Update Category
-const createCategory = catchAsync(async (req: Request, res: Response) => {
-  const result = await adminService.createCategoryIntoDB(
-    req.body
-  );
-
-  sendResponse(res, {
-    success: true,
-    statusCode: httpStatus.OK,
-    message: "Category created successfully.",
-    data: result,
-  });
-});
 
 export const adminController = {
   getAllUsers,
   getAllBookings,
   getAllCategories,
-  updateUserStatus,
   createCategory,
+  createService,
+  updateUserStatus
 };
