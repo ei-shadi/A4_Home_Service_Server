@@ -27,6 +27,54 @@ export const getAdminProfileFromDB = async (userId: string) => {
   };
 };
 
+// Get All Users From DB
+const getAllUsersFromDB = async () => {
+  const users = await prisma.user.findMany({
+    omit: {
+      roleId: true,
+      passwordHash: true,
+      deletedAt: true,
+    },
+    include: {
+      role: {
+        select: {
+          name: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return users.map((user) => ({
+    ...user,
+    role: user.role.name,
+  }));
+};
+
+// Get All Bookings From DB
+const getAllBookingsFromDB = async () => {
+  const bookings = await prisma.booking.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return bookings;
+}
+
+// Get All Categories From DB
+const getAllCategoriesFromDB = async () => {
+  const categories = await prisma.category.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return categories;
+}
+
 // Update Category
 const updateCategoryIntoDB = async (
   id: string,
@@ -74,7 +122,10 @@ const updateCategoryIntoDB = async (
   return updatedCategory;
 };
 
-
+ 
 export const adminService = {
+  getAllUsersFromDB,
+  getAllBookingsFromDB,
+  getAllCategoriesFromDB,
   updateCategoryIntoDB,
 };
