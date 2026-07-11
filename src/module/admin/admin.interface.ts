@@ -1,3 +1,5 @@
+import { UserStatus } from "@prisma/client";
+
 export interface IUpdateCategory {
   name: string;
   icon?: string;
@@ -6,3 +8,8 @@ export interface IUpdateCategory {
 }
 
 export type TCategoryStatus = "ACTIVE" | "INACTIVE";
+
+
+export interface IUpdateUserStatus {
+  status: UserStatus;
+}

@@ -1,5 +1,6 @@
+import { UserStatus } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
-import { IUpdateCategory, TCategoryStatus } from "./admin.interface";
+import { IUpdateCategory, IUpdateUserStatus, TCategoryStatus } from "./admin.interface";
 
 // Get Admin Profile
 export const getAdminProfileFromDB = async (userId: string) => {
@@ -75,6 +76,66 @@ const getAllCategoriesFromDB = async () => {
   return categories;
 }
 
+// Update User Status Into DB
+const updateUserStatusIntoDB = async (
+  id: string,
+  payload: IUpdateUserStatus
+) => {
+  const { status } = payload;
+
+  // Check payload
+  if (!status) {
+    throw new Error("Status is required.");
+  }
+
+  // Normalize status
+  const normalizedStatus = status.toUpperCase() as UserStatus;
+
+  // Check user exists
+  const user = await prisma.user.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      role: true,
+    },
+  });
+
+  if (!user) {
+    throw new Error("User not found.");
+  }
+
+ 
+
+  // Update
+  const updatedUser = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: {
+      status: normalizedStatus,
+    },
+    omit: {
+      passwordHash: true,
+      roleId: true,
+      deletedAt: true,
+    },
+    include: {
+      role: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
+  return {
+    ...updatedUser,
+    role: updatedUser.role.name,
+  };
+};
+
+
 // Update Category
 const updateCategoryIntoDB = async (
   id: string,
@@ -127,5 +188,6 @@ export const adminService = {
   getAllUsersFromDB,
   getAllBookingsFromDB,
   getAllCategoriesFromDB,
+  updateUserStatusIntoDB,
   updateCategoryIntoDB,
 };

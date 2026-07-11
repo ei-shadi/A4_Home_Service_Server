@@ -40,6 +40,21 @@ const getAllCategories = catchAsync(async (req: Request, res: Response) => {
   });
 }) 
 
+// Update User Status
+const updateUserStatus = catchAsync(async (req, res) => {
+  const result = await adminService.updateUserStatusIntoDB(
+    req.params.id as string,
+    req.body
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "User status updated successfully.",
+    data: result,
+  });
+});
+
 // Update Category
 const updateCategory = catchAsync(async (req: Request, res: Response) => {
   const result = await adminService.updateCategoryIntoDB(
@@ -59,5 +74,6 @@ export const adminController = {
   getAllUsers,
   getAllBookings,
   getAllCategories,
+  updateUserStatus,
   updateCategory,
 };
