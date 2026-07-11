@@ -1,6 +1,6 @@
 import { UserStatus } from "@prisma/client";
 
-export interface IUpdateCategory {
+export interface ICategory {
   name: string;
   icon?: string;
   description?: string;

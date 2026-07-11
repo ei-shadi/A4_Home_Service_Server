@@ -30,6 +30,14 @@ route.get(
   adminController.getAllCategories,
 );
 
+// Create Category
+route.post(
+  "/categories",
+  authenticate,
+  authorize(USER_ROLE.ADMIN),
+  adminController.createCategory,
+);
+
 // Update User Status Api
 route.patch(
   "/users/:id",
@@ -38,12 +46,6 @@ route.patch(
   adminController.updateUserStatus,
 );
 
-// Update Category
-route.put(
-  "/categories",
-  authenticate,
-  authorize(USER_ROLE.ADMIN),
-  adminController.updateCategory,
-);
+
 
 export const adminRoute = route;

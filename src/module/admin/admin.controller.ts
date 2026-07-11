@@ -56,16 +56,15 @@ const updateUserStatus = catchAsync(async (req, res) => {
 });
 
 // Update Category
-const updateCategory = catchAsync(async (req: Request, res: Response) => {
-  const result = await adminService.updateCategoryIntoDB(
-    req.params.id as string,
+const createCategory = catchAsync(async (req: Request, res: Response) => {
+  const result = await adminService.createCategoryIntoDB(
     req.body
   );
 
   sendResponse(res, {
     success: true,
     statusCode: httpStatus.OK,
-    message: "Category updated successfully.",
+    message: "Category created successfully.",
     data: result,
   });
 });
@@ -75,5 +74,5 @@ export const adminController = {
   getAllBookings,
   getAllCategories,
   updateUserStatus,
-  updateCategory,
+  createCategory,
 };

@@ -1,6 +1,6 @@
 import { UserStatus } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
-import { IUpdateCategory, IUpdateUserStatus, TCategoryStatus } from "./admin.interface";
+import { ICategory, IUpdateUserStatus, TCategoryStatus } from "./admin.interface";
 
 // Get Admin Profile
 export const getAdminProfileFromDB = async (userId: string) => {
@@ -105,7 +105,10 @@ const updateUserStatusIntoDB = async (
     throw new Error("User not found.");
   }
 
- 
+  // Prevent banning Admin (Recommended)
+  if (user.role.name === "ADMIN") {
+    throw new Error("Admin status cannot be changed.");
+  }
 
   // Update
   const updatedUser = await prisma.user.update({
@@ -135,18 +138,17 @@ const updateUserStatusIntoDB = async (
   };
 };
 
-
-// Update Category
-const updateCategoryIntoDB = async (
-  id: string,
-  payload: IUpdateCategory
-) => {
+// Create Category Into DB
+const createCategoryIntoDB = async (payload: ICategory) => {
   const { name, icon, description, status } = payload;
 
   // Check payload
   if (Object.keys(payload).length === 0) {
-    throw new Error("Please provide at least one field to update.");
+    throw new Error("Please provide category information.");
   }
+
+  // Normalize name
+  const normalizedName = name.trim();
 
   // Normalize status
   const normalizedStatus = status
@@ -154,33 +156,27 @@ const updateCategoryIntoDB = async (
     : undefined;
 
   // Check duplicate category name
-  if (name) {
-    const isNameExist = await prisma.category.findFirst({
-      where: {
-        name,
-        NOT: {
-          id,
-        },
-      },
-    });
+  const isNameExist = await prisma.category.findUnique({
+    where: {
+      name: normalizedName,
+    },
+  });
 
-    if (isNameExist) {
-      throw new Error("Category name already exists.");
-    }
+  if (isNameExist) {
+    throw new Error("Category already exists.");
   }
 
-  // Update category
-  const updatedCategory = await prisma.category.update({
-    where: { id },
+  // Create category
+  const category = await prisma.category.create({
     data: {
-      name,
+      name: normalizedName,
       icon,
       description,
       status: normalizedStatus,
     },
   });
 
-  return updatedCategory;
+  return category;
 };
 
  
@@ -189,5 +185,5 @@ export const adminService = {
   getAllBookingsFromDB,
   getAllCategoriesFromDB,
   updateUserStatusIntoDB,
-  updateCategoryIntoDB,
+  createCategoryIntoDB,
 };
