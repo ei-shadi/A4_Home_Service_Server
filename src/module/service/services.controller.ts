@@ -32,7 +32,33 @@ const getAllTechnicianServices = catchAsync(
   },
 );
 
+// Get All Technician Profile
+const getAllTechnicians = catchAsync(async (req: Request, res: Response) => {
+  const result = await servicesService.getAllTechniciansFromDB();
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "All Technicians retrieved successfully",
+    data: result,
+  });
+})
+
+// Get All Categories
+const getAllCategories = catchAsync(async (req: Request, res: Response) => {
+  const result = await servicesService.getAllCategoriesFromDB();
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "All Categories retrieved successfully",
+    data: result,
+  });
+})
+
 export const servicesController = {
   getAllServices,
   getAllTechnicianServices,
+  getAllTechnicians,
+  getAllCategories
 };

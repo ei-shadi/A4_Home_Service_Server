@@ -42,7 +42,7 @@ app.use("/api/users", userRoute);
 // Technician Routes
 app.use("/api/technician", technicianRoute);
 // Services Routes
-app.use("/api/services", serviceRoute);
+app.use("/api", serviceRoute);
 
 // Not Found Middleware
 app.use(notFound);

@@ -1,4 +1,3 @@
-import { Prisma } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
 
 // Get All Services From DBconst getAllServicesFromDB = async () => {
@@ -165,8 +164,32 @@ const getAllTechnicianServicesFromDB = async (
   }));
 };
 
+// Get All Technicians
+const getAllTechniciansFromDB = async () => {
+  const technicians = await prisma.technicianProfile.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return technicians;
+};
+
+// Get All Categories
+const getAllCategoriesFromDB = async () => {
+  const categories = await prisma.category.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return categories;
+};
+
 
 export const servicesService = {
   getAllServicesFromDB,
   getAllTechnicianServicesFromDB,
+  getAllTechniciansFromDB,
+  getAllCategoriesFromDB,
 };
