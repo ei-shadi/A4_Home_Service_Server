@@ -44,6 +44,20 @@ const getAllTechnicians = catchAsync(async (req: Request, res: Response) => {
   });
 })
 
+// Get Technician By Id
+const getTechnicianById = catchAsync(async (req: Request, res: Response) => {
+  const result = await servicesService.getTechnicianByIdFromDB(
+    req.params.id as string
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.OK,
+    message: "Technician profile retrieved successfully",
+    data: result,
+  });
+});
+
 // Get All Categories
 const getAllCategories = catchAsync(async (req: Request, res: Response) => {
   const result = await servicesService.getAllCategoriesFromDB();
@@ -60,5 +74,6 @@ export const servicesController = {
   getAllServices,
   getAllTechnicianServices,
   getAllTechnicians,
+  getTechnicianById,
   getAllCategories
 };
