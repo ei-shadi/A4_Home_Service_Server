@@ -1,5 +1,8 @@
+import { ServiceStatus } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
+import { IUpdateTechnicianProfile } from "./technician.interface";
 
+// Get Technician Profile
 export const getTechnicianProfileFromDB = async (userId: string) => {
   const technician = await prisma.user.findUniqueOrThrow({
     where: {
@@ -43,14 +46,19 @@ export const getTechnicianProfileFromDB = async (userId: string) => {
     role: technician.role.name,
   };
 };
-const updateProfileIntoDB = async (
-  userId: string,
-  payload: any
-) => {
 
+
+// Update Profile
+export const updateProfileIntoDB = async (
+  userId: string,
+  payload: IUpdateTechnicianProfile
+) => {
   const {
-    services,
-    ...profileData
+    bio,
+    yearsOfExperience,
+    experienceDescription,
+    availabilityStatus,
+    technicianServices,
   } = payload;
 
   const technician = await prisma.technicianProfile.findUnique({
@@ -64,41 +72,54 @@ const updateProfileIntoDB = async (
   }
 
   return await prisma.$transaction(async (tx) => {
-
+    // Update Profile
     await tx.technicianProfile.update({
       where: {
-        id: technician.id,
+        userId,
       },
-      data: profileData,
+      data: {
+        bio,
+        yearsOfExperience,
+        experienceDescription,
+        availabilityStatus,
+      },
     });
 
-    if (services?.length) {
-
-      for (const service of services) {
-
-        const serviceExist = await tx.service.findFirst({
+    // Create / Update Technician Services
+    if (technicianServices?.length) {
+      for (const item of technicianServices) {
+        const service = await tx.service.findUnique({
           where: {
-            id: service.id,
-            technicianId: technician.id,
+            id: item.serviceId,
           },
         });
 
-        if (!serviceExist) {
-          throw new Error(`Service ${service.id} not found.`);
+        if (!service) {
+          throw new Error("Service not found.");
         }
 
-        await tx.service.update({
+        await tx.technicianService.upsert({
           where: {
-            id: service.id,
+            technicianId_serviceId: {
+              technicianId: technician.id,
+              serviceId: item.serviceId,
+            },
           },
-          data: {
-            title: service.title,
-            description: service.description,
-            price: service.price,
-            pricingType: service.pricingType,
-            estimatedDuration: service.estimatedDuration,
-            serviceImage: service.serviceImage,
-            categoryId: service.categoryId,
+          update: {
+            price: item.price,
+            pricingType: item.pricingType,
+            estimatedDuration: item.estimatedDuration,
+            serviceImage: item.serviceImage,
+            status: item.status,
+          },
+          create: {
+            technicianId: technician.id,
+            serviceId: item.serviceId,
+            price: item.price,
+            pricingType: item.pricingType,
+            estimatedDuration: item.estimatedDuration,
+            serviceImage: item.serviceImage,
+            status: item.status ?? ServiceStatus.ACTIVE,
           },
         });
       }
@@ -106,13 +127,16 @@ const updateProfileIntoDB = async (
 
     return await tx.technicianProfile.findUnique({
       where: {
-        id: technician.id,
+        userId,
       },
       include: {
-        user: true,
-        services: {
+        technicianServices: {
           include: {
-            category: true,
+            service: {
+              include: {
+                category: true,
+              },
+            },
           },
         },
       },

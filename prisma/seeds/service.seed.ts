@@ -1,56 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 
 const services = [
-  {
-    category: "Plumbing",
-    title: "Pipe Repair",
-    description: "Repair leaking and damaged pipes.",
-  },
-  {
-    category: "Plumbing",
-    title: "Leak Detection",
-    description: "Detect hidden water leaks.",
-  },
-  {
-    category: "Electrical",
-    title: "House Wiring",
-    description: "Complete electrical wiring.",
-  },
-  {
-    category: "Electrical",
-    title: "Fan Installation",
-    description: "Install ceiling and exhaust fans.",
-  },
-  {
-    category: "Cleaning",
-    title: "Deep Cleaning",
-    description: "Complete home deep cleaning.",
-  },
-  {
-    category: "Painting",
-    title: "Interior Painting",
-    description: "Professional wall painting.",
-  },
-  {
-    category: "Carpentry",
-    title: "Furniture Repair",
-    description: "Repair wooden furniture.",
-  },
-  {
-    category: "AC Repair",
-    title: "AC Servicing",
-    description: "AC maintenance and servicing.",
-  },
-  {
-    category: "Pest Control",
-    title: "Termite Control",
-    description: "Professional termite treatment.",
-  },
-  {
-    category: "CCTV Installation",
-    title: "CCTV Camera Installation",
-    description: "Install CCTV security systems.",
-  },
+  { category: "Plumbing", name: "Pipe Repair", description: "Repair leaking and damaged pipes." },
+  { category: "Plumbing", name: "Leak Detection", description: "Detect hidden water leaks." },
+  { category: "Electrical", name: "House Wiring", description: "Complete electrical wiring." },
+  { category: "Electrical", name: "Fan Installation", description: "Install ceiling and exhaust fans." },
+  { category: "Cleaning", name: "Deep Cleaning", description: "Complete home deep cleaning." },
+  { category: "Painting", name: "Interior Painting", description: "Professional wall painting." },
+  { category: "Carpentry", name: "Furniture Repair", description: "Repair wooden furniture." },
+  { category: "AC Repair", name: "AC Servicing", description: "AC maintenance and servicing." },
+  { category: "Pest Control", name: "Termite Control", description: "Professional termite treatment." },
+  { category: "CCTV Installation", name: "CCTV Camera Installation", description: "Install CCTV security systems." },
 ];
 
 export const seedServices = async (prisma: PrismaClient) => {
@@ -65,14 +25,14 @@ export const seedServices = async (prisma: PrismaClient) => {
 
     await prisma.service.upsert({
       where: {
-        categoryId_title: {
+        categoryId_name: {
           categoryId: category.id,
-          title: service.title,
+          name: service.name,
         },
       },
       update: {},
       create: {
-        title: service.title,
+        name: service.name,
         description: service.description,
         categoryId: category.id,
       },

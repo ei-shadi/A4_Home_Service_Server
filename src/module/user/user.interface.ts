@@ -6,3 +6,5 @@ export type TUser = {
   email: string;
   role: (typeof USER_ROLE)[keyof typeof USER_ROLE];
 };
+
+export type TUserStatus = "ACTIVE" | "INACTIVE" | "SUSPENDED" | "BANNED";

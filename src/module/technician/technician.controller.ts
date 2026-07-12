@@ -5,6 +5,8 @@ import { catchAsync } from "../../shared/utils/catchAsync";
 import { sendResponse } from "../../shared/utils/sendResponse";
 import { technicianService } from "./technician.service";
 
+
+// Update Profile
 const updateProfile = catchAsync(async (req: Request, res: Response) => {
   const result = await technicianService.updateProfileIntoDB(
     req.user!.id,

@@ -7,6 +7,7 @@ import { USER_ROLE } from "../auth/auth.constant";
 const route = Router();
 
 
+// Update Profile
 route.put(
   "/profile",
   authenticate,

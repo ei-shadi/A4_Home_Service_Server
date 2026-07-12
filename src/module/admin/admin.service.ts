@@ -1,6 +1,7 @@
 import { ServiceStatus, UserStatus } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
 import { ICategory, IService, IUpdateUserStatus, TCategoryStatus } from "./admin.interface";
+import { TUserStatus } from "../user/user.interface";
 
 // Get Admin Profile
 export const getAdminProfileFromDB = async (userId: string) => {
@@ -185,7 +186,7 @@ const updateUserStatusIntoDB = async (
   }
 
   // Normalize status
-  const normalizedStatus = status.toUpperCase() as UserStatus;
+  const normalizedStatus = status.toUpperCase() as TUserStatus;
 
   // Check user exists
   const user = await prisma.user.findUnique({
@@ -233,7 +234,6 @@ const updateUserStatusIntoDB = async (
     role: updatedUser.role.name,
   };
 };
-
 
 
 export const adminService = {

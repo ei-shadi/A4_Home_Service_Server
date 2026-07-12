@@ -1,11 +1,19 @@
-export type TUpdateAvailability = {
-  availabilityStatus: "ONLINE" | "OFFLINE" | "BUSY";
-};
+import { AvailabilityStatus, PricingType, ServiceStatus } from "@prisma/client";
 
-export type TUpdateTechnicianProfile = {
+export interface IUpdateTechnicianProfile {
   bio?: string;
   yearsOfExperience?: number;
-  profileImage?: string;
-  address?: string;
-  city?: string;
-};
+  experienceDescription?: string;
+  availabilityStatus?: AvailabilityStatus;
+
+  technicianServices?: IUpdateTechnicianService[];
+}
+
+export interface IUpdateTechnicianService {
+  serviceId: string;
+  price: number;
+  pricingType: PricingType;
+  estimatedDuration: number;
+  serviceImage?: string;
+  status?: ServiceStatus;
+}

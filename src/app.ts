@@ -8,6 +8,7 @@ import { globalErrorHandler } from './middleware/globalErrorHandler';
 import { userRoute } from './module/user/user.route';
 import { technicianRoute } from './module/technician/technician.route';
 import { adminRoute } from './module/admin/admin.route';
+import { serviceRoute } from './module/service/services.route';
 
 
 const app : Application = express();
@@ -41,7 +42,7 @@ app.use("/api/users", userRoute);
 // Technician Routes
 app.use("/api/technician", technicianRoute);
 // Services Routes
-// app.use("/api/services", userRoute);
+app.use("/api/services", serviceRoute);
 
 // Not Found Middleware
 app.use(notFound);
