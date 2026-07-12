@@ -1,5 +1,5 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "../../lib/prisma";
-
 
 // Get All Services From DBconst getAllServicesFromDB = async () => {
 const getAllServicesFromDB = async () => {
@@ -32,19 +32,79 @@ const getAllServicesFromDB = async () => {
 };
 
 // Get All Technician Services
-const getAllTechnicianServicesFromDB = async () => {
-  const services = await prisma.technicianService.findMany({
-    where: {
+const getAllTechnicianServicesFromDB = async (
+  query: Record<string, any>
+) => {
+  const {
+    category,
+    city,
+    rating,
+    minPrice,
+    maxPrice,
+  } = query;
+
+  const where: any = {
+    status: "ACTIVE",
+
+    service: {
       status: "ACTIVE",
-      service: {
-        status: "ACTIVE",
-      },
-      technician: {
-        availabilityStatus: "ONLINE"
-      },
     },
 
-    include: {
+    technician: {
+      availabilityStatus: "ONLINE",
+    },
+  };
+
+  // Category Filter
+  if (category) {
+    where.service.category = {
+      name: {
+        equals: category,
+        mode: "insensitive",
+      },
+    };
+  }
+
+  // City Filter
+  if (city) {
+    where.technician.user = {
+      city: {
+        equals: city,
+        mode: "insensitive",
+      },
+    };
+  }
+
+  // Rating Filter
+  if (rating) {
+    where.technician.averageRating = {
+      gte: Number(rating),
+    };
+  }
+
+  // Price Filter
+  if (minPrice || maxPrice) {
+    where.price = {};
+
+    if (minPrice) {
+      where.price.gte = Number(minPrice);
+    }
+
+    if (maxPrice) {
+      where.price.lte = Number(maxPrice);
+    }
+  }
+
+  const services = await prisma.technicianService.findMany({
+    where,
+
+    select: {
+      id: true,
+      price: true,
+      pricingType: true,
+      estimatedDuration: true,
+      serviceImage: true,
+
       service: {
         select: {
           id: true,
@@ -52,7 +112,6 @@ const getAllTechnicianServicesFromDB = async () => {
           description: true,
           category: {
             select: {
-              id: true,
               name: true,
             },
           },
@@ -61,7 +120,6 @@ const getAllTechnicianServicesFromDB = async () => {
 
       technician: {
         select: {
-          id: true,
           averageRating: true,
           totalReviews: true,
 
@@ -82,10 +140,33 @@ const getAllTechnicianServicesFromDB = async () => {
     },
   });
 
-  return services;
+  return services.map((item) => ({
+    id: item.id,
+    price: item.price,
+    pricingType: item.pricingType,
+    estimatedDuration: item.estimatedDuration,
+    serviceImage: item.serviceImage,
+
+    service: {
+      id: item.service.id,
+      name: item.service.name,
+      description: item.service.description,
+      category: item.service.category.name,
+    },
+
+    technician: {
+      id: item.technician.user.id,
+      name: item.technician.user.name,
+      city: item.technician.user.city,
+      profileImage: item.technician.user.profileImage,
+      averageRating: item.technician.averageRating,
+      totalReviews: item.technician.totalReviews,
+    },
+  }));
 };
 
+
 export const servicesService = {
- getAllServicesFromDB,
- getAllTechnicianServicesFromDB,
+  getAllServicesFromDB,
+  getAllTechnicianServicesFromDB,
 };

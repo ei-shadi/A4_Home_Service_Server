@@ -47,7 +47,6 @@ export const getTechnicianProfileFromDB = async (userId: string) => {
   };
 };
 
-
 // Update Profile
 export const updateProfileIntoDB = async (
   userId: string,
