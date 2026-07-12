@@ -8,3 +8,14 @@ export type TUser = {
 };
 
 export type TUserStatus = "ACTIVE" | "INACTIVE" | "SUSPENDED" | "BANNED";
+
+export interface IUpdateUserProfile {
+  name?: string;
+  email?: string;
+  phone?: string;
+  profileImage?: string;
+  address?: string;
+  city?: string;
+  latitude?: number;
+  longitude?: number;
+}

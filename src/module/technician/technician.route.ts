@@ -15,26 +15,26 @@ route.put(
   technicianController.updateProfile,
 );
 
-// route.put(
-//   "/availability",
-//   authenticate,
-//   authorize(USER_ROLE.TECHNICIAN),
-//   technicianController.updateAvailability,
-// );
+route.patch(
+  "/availability",
+  authenticate,
+  authorize(USER_ROLE.TECHNICIAN),
+  technicianController.updateAvailabilityStatus,
+);
 
-// route.get(
-//   "/bookings",
-//  authenticate,
-//   authorize(USER_ROLE.TECHNICIAN),
-//   technicianController.getMyBookings,
-// );
+route.get(
+  "/bookings",
+ authenticate,
+  authorize(USER_ROLE.TECHNICIAN),
+  technicianController.getMyBookings,
+);
 
-// route.patch(
-//   "/bookings/:id",
-//   authenticate,
-//   authorize(USER_ROLE.TECHNICIAN),
-//   technicianController.updateBookingStatus,
-// );
+route.patch(
+  "/bookings/:id",
+  authenticate,
+  authorize(USER_ROLE.TECHNICIAN),
+  technicianController.updateBookingsStatus,
+);
 
 
 export const technicianRoute = route;
