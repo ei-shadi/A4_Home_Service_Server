@@ -48,13 +48,14 @@ const updateAvailabilityStatus = catchAsync(async (req: Request, res: Response) 
   });
 });
 
-// Update Bookigns Status
+// Update Bookings Status
 const updateBookingsStatus = catchAsync(async (req: Request, res: Response) => {
   const result = await technicianService.updateBookingStatusIntoDB(
     req.user!.id,
     req.params.bookingId as string,
     req.body
   );
+
 
   sendResponse(res, {
     success: true,

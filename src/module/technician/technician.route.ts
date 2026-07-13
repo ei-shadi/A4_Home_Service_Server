@@ -15,6 +15,7 @@ route.put(
   technicianController.updateProfile,
 );
 
+// Update Availability
 route.patch(
   "/availability",
   authenticate,
@@ -22,6 +23,7 @@ route.patch(
   technicianController.updateAvailabilityStatus,
 );
 
+// Get My Bookings
 route.get(
   "/bookings",
  authenticate,
@@ -29,8 +31,9 @@ route.get(
   technicianController.getMyBookings,
 );
 
+// Update Bookings
 route.patch(
-  "/bookings/:id",
+  "/bookings/:bookingId",
   authenticate,
   authorize(USER_ROLE.TECHNICIAN),
   technicianController.updateBookingsStatus,
