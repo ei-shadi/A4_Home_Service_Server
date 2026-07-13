@@ -55,7 +55,7 @@ enum PaymentMethod {
 
 enum PaymentStatus {
   PENDING
-  PROCESSING
+  IN_PROGRESS
   COMPLETED
   FAILED
   REFUNDED
