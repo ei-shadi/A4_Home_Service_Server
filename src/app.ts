@@ -9,6 +9,7 @@ import { userRoute } from './module/user/user.route';
 import { technicianRoute } from './module/technician/technician.route';
 import { adminRoute } from './module/admin/admin.route';
 import { serviceRoute } from './module/service/services.route';
+import { bookingRoute } from './module/booking/booking.route';
 
 
 const app : Application = express();
@@ -43,6 +44,8 @@ app.use("/api/users", userRoute);
 app.use("/api/technician", technicianRoute);
 // Services Routes
 app.use("/api", serviceRoute);
+// Booking Routes
+app.use("/api/booking", bookingRoute);
 
 // Not Found Middleware
 app.use(notFound);

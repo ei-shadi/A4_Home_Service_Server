@@ -106,7 +106,6 @@ const getAllTechnicianServicesFromDB = async (
 
       service: {
         select: {
-          id: true,
           name: true,
           description: true,
           category: {
@@ -147,7 +146,6 @@ const getAllTechnicianServicesFromDB = async (
     serviceImage: item.serviceImage,
 
     service: {
-      id: item.service.id,
       name: item.service.name,
       description: item.service.description,
       category: item.service.category.name,
