@@ -6,11 +6,12 @@ model Payment {
   bookingId String @unique @map("booking_id") @db.Uuid
 
   // Business Fields
-  transactionId   String        @unique @map("transaction_id") @db.VarChar(255)
-  amount          Decimal       @db.Decimal(10, 2)
-  paymentMethod   PaymentMethod @map("payment_method")
-  paymentProvider String        @map("payment_provider") @db.VarChar(50)
-  currency        String        @db.Char(3)
+  transactionId   String?        @unique @map("transaction_id") @db.VarChar(255)
+  stripeSessionId String?        @unique @map("stripe_session_id") @db.VarChar(255)
+  amount          Decimal        @db.Decimal(10, 2)
+  paymentMethod   PaymentMethod? @map("payment_method")
+  paymentProvider String         @map("payment_provider") @db.VarChar(50)
+  currency        String         @db.Char(3)
 
   // Status
   status PaymentStatus @default(PENDING)

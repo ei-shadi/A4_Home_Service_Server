@@ -10,6 +10,7 @@ import { technicianRoute } from './module/technician/technician.route';
 import { adminRoute } from './module/admin/admin.route';
 import { serviceRoute } from './module/service/services.route';
 import { bookingRoute } from './module/booking/booking.route';
+import { paymentRoute } from './module/payment/payment.route';
 
 
 const app : Application = express();
@@ -46,6 +47,11 @@ app.use("/api/technician", technicianRoute);
 app.use("/api", serviceRoute);
 // Booking Routes
 app.use("/api/booking", bookingRoute);
+// Payments Routes
+app.use("/api/payments", paymentRoute);
+
+// Review Routes
+
 
 // Not Found Middleware
 app.use(notFound);

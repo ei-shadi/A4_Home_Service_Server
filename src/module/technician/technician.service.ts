@@ -309,6 +309,9 @@ export const updateBookingStatusIntoDB = async (
 ) => {
   const { status } = payload;
 
+  // Normalize status
+  const normalizedStatus = status.toUpperCase() as BookingStatus;
+
   // Find technician profile
   const technician = await prisma.technicianProfile.findUnique({
     where: {
@@ -349,7 +352,7 @@ export const updateBookingStatusIntoDB = async (
       id: bookingId,
     },
     data: {
-      status,
+      status: normalizedStatus,
       completedAt:
         status === BookingStatus.COMPLETED ? new Date() : null,
     },

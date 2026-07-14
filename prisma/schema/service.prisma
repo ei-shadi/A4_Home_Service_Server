@@ -6,7 +6,7 @@ model Service {
   categoryId String @map("category_id") @db.Uuid
 
   // Business Fields
-  name       String  @db.VarChar(200)
+  name        String  @db.VarChar(200)
   description String? @db.Text
 
   // Status
