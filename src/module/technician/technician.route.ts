@@ -4,11 +4,11 @@ import { authenticate } from "../../middleware/authentication";
 import { authorize } from "../../middleware/authorization";
 import { USER_ROLE } from "../auth/auth.constant";
 
-const route = Router();
+const router = Router();
 
 
 // Update Profile
-route.put(
+router.put(
   "/profile",
   authenticate,
   authorize(USER_ROLE.TECHNICIAN),
@@ -16,7 +16,7 @@ route.put(
 );
 
 // Update Availability
-route.patch(
+router.patch(
   "/availability",
   authenticate,
   authorize(USER_ROLE.TECHNICIAN),
@@ -24,7 +24,7 @@ route.patch(
 );
 
 // Get My Bookings
-route.get(
+router.get(
   "/bookings",
  authenticate,
   authorize(USER_ROLE.TECHNICIAN),
@@ -32,7 +32,7 @@ route.get(
 );
 
 // Update Bookings
-route.patch(
+router.patch(
   "/bookings/:bookingId",
   authenticate,
   authorize(USER_ROLE.TECHNICIAN),
@@ -40,4 +40,4 @@ route.patch(
 );
 
 
-export const technicianRoute = route;
+export const technicianRoute = router;

@@ -5,9 +5,11 @@ import { USER_ROLE } from "../auth/auth.constant";
 import { bookingController } from "./booking.controller";
 
 
-const route = Router();
+const router = Router();
+
+
 // Get logged-in user's bookings
-route.get(
+router.get(
   "/",
   authenticate,
   bookingController.getMyBookings
@@ -15,14 +17,14 @@ route.get(
 
 
 // Get single booking details
-route.get(
+router.get(
   "/:id",
   authenticate,
   bookingController.getBookingById
 );
 
 // Create a new booking
-route.post(
+router.post(
   "/",
   authenticate,
   authorize(USER_ROLE.CUSTOMER),
@@ -31,4 +33,4 @@ route.post(
 
 
 
-export const bookingRoute = route;
+export const bookingRoute = router;

@@ -4,10 +4,10 @@ import { authorize } from "../../middleware/authorization";
 import { USER_ROLE } from "../auth/auth.constant";
 import { adminController } from "./admin.controller";
 
-const route = Router();
+const router = Router();
 
 // Get All Users Api
-route.get(
+router.get(
   "/users",
   authenticate,
   authorize(USER_ROLE.ADMIN),
@@ -15,7 +15,7 @@ route.get(
 );
 
 // Get All Bookings Api
-route.get(
+router.get(
   "/bookings",
   authenticate,
   authorize(USER_ROLE.ADMIN),
@@ -23,7 +23,7 @@ route.get(
 );
 
 // Get All Categories Api
-route.get(
+router.get(
   "/categories",
   authenticate,
   authorize(USER_ROLE.ADMIN),
@@ -31,7 +31,7 @@ route.get(
 );
 
 // Create Category Api
-route.post(
+router.post(
   "/categories",
   authenticate,
   authorize(USER_ROLE.ADMIN),
@@ -39,7 +39,7 @@ route.post(
 );
 
 // Create Service Api
-route.post(
+router.post(
   "/services",
   authenticate,
   authorize(USER_ROLE.ADMIN),
@@ -47,7 +47,7 @@ route.post(
 )
 
 // Update User Status Api
-route.patch(
+router.patch(
   "/users/:id",
   authenticate,
   authorize(USER_ROLE.ADMIN),
@@ -56,4 +56,4 @@ route.patch(
 
 
 
-export const adminRoute = route;
+export const adminRoute = router;

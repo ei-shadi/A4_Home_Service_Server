@@ -10,7 +10,7 @@ dotenv.config({
 
 
 const config = {
-  port: env.PORT || 3000,
+  port: env.PORT || 5000,
   environment: env.NODE_ENV || "development",
   database_url: env.DATABASE_URL as string,
   app_url : env.APP_URL,

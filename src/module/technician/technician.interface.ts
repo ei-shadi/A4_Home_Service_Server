@@ -4,8 +4,8 @@ export interface IUpdateAvailabilityStatus {
   availabilityStatus: AvailabilityStatus;
 }
 
-export interface IUpdateBookingStatus {
-  status: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "CANCELLED";
+export interface ITechnicianUpdateBookingStatus {
+  status: "ACCEPTED" | "IN_PROGRESS" | "COMPLETED";
 }
 
 export interface IUpdateTechnicianProfile {

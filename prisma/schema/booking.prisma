@@ -20,7 +20,7 @@ model Booking {
 
   totalAmount Decimal @map("total_amount") @db.Decimal(10, 2)
 
-  status BookingStatus @default(PENDING)
+  status BookingStatus @default(REQUESTED)
 
   notes String? @db.Text
 

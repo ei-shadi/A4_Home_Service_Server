@@ -4,7 +4,7 @@ import { IUpdateTechnicianProfile } from "./technician.interface";
 import { AvailabilityStatus } from "@prisma/client";
 import { IUpdateAvailabilityStatus } from "./technician.interface";
 import { BookingStatus } from "@prisma/client";
-import { IUpdateBookingStatus } from "./technician.interface";
+import { ITechnicianUpdateBookingStatus } from "./technician.interface";
 
 
 // Get Technician Profile
@@ -305,7 +305,7 @@ const updateAvailabilityStatusIntoDB = async (
 export const updateBookingStatusIntoDB = async (
   userId: string,
   bookingId: string,
-  payload: IUpdateBookingStatus
+  payload: ITechnicianUpdateBookingStatus
 ) => {
   const { status } = payload;
 

@@ -39,11 +39,13 @@ enum ServiceStatus {
 
 // Booking Enums
 enum BookingStatus {
-  PENDING
+  REQUESTED
   ACCEPTED
+  PAID
   IN_PROGRESS
   COMPLETED
   CANCELLED
+  DECLINED
 }
 
 // Payment Enums
@@ -55,7 +57,6 @@ enum PaymentMethod {
 
 enum PaymentStatus {
   PENDING
-  IN_PROGRESS
   COMPLETED
   FAILED
   REFUNDED

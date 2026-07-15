@@ -2,10 +2,10 @@ import { Router } from "express";
 import { authenticate } from "../../middleware/authentication";
 import { reviewController } from "./review.controller";
 
-const route = Router();
+const router = Router();
 
 
-// route.get("/me", authenticate, reviewController);
+// router.get("/me", authenticate, reviewController);
 
 
-export const userRoute = route;
+export const userRoute = router;

@@ -4,13 +4,27 @@ import { paymentController } from "./payment.controller";
 import { authorize } from "../../middleware/authorization";
 import { USER_ROLE } from "../auth/auth.constant";
 
-const route = Router();
+const router = Router();
 
-route.post(
+router.post(
   "/checkout-session",
   authenticate,
   authorize(USER_ROLE.CUSTOMER, USER_ROLE.TECHNICIAN, USER_ROLE.ADMIN),
   paymentController.createPaymentSession,
 );
+router.get(
+  "/",
+  authenticate,
+  authorize(USER_ROLE.CUSTOMER),
+  paymentController.getMyPayments,
+);
 
-export const paymentRoute = route;
+router.get(
+  "/:id",
+  authenticate,
+  authorize(USER_ROLE.CUSTOMER),
+  paymentController.getPaymentById,
+);
+
+
+export const paymentRoute = router;

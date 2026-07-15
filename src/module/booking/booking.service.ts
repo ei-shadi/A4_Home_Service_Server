@@ -323,7 +323,7 @@ export const createBookingIntoDB = async (
       bookingDate: bookingDateObj,
 
       status: {
-        in: ["PENDING", "ACCEPTED", "IN_PROGRESS"],
+        in: ["REQUESTED", "ACCEPTED", "CANCELLED"],
       },
 
       AND: [
@@ -358,9 +358,9 @@ export const createBookingIntoDB = async (
       bookingDate: bookingDateObj,
       status: {
         in: [
-          BookingStatus.PENDING,
+          BookingStatus.REQUESTED,
           BookingStatus.ACCEPTED,
-          BookingStatus.IN_PROGRESS,
+          BookingStatus.CANCELLED,
         ],
       },
 

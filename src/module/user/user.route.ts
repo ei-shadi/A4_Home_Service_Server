@@ -2,11 +2,11 @@ import { Router } from "express";
 import { userController } from "./user.controller";
 import { authenticate } from "../../middleware/authentication";
 
-const route = Router();
+const router = Router();
 
 
-route.get("/me", authenticate, userController.getMyProfile);
-route.patch("/me", authenticate, userController.updateMyProfile);
+router.get("/me", authenticate, userController.getMyProfile);
+router.patch("/me", authenticate, userController.updateMyProfile);
 
 
-export const userRoute = route;
+export const userRoute = router;
