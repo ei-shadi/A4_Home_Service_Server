@@ -12,6 +12,12 @@ router.post(
   authorize(USER_ROLE.CUSTOMER, USER_ROLE.TECHNICIAN, USER_ROLE.ADMIN),
   paymentController.createPaymentSession,
 );
+
+router.post(
+  "/webhook",
+  paymentController.handleWebhook,
+);
+
 router.get(
   "/",
   authenticate,
