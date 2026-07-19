@@ -227,20 +227,22 @@ npm install
 Create a `.env` file inside the project root.
 
 ```env
-NODE_ENV=development
 PORT=5000
 
-DATABASE_URL=your_database_url
-
-JWT_ACCESS_SECRET=your_jwt_secret
-JWT_ACCESS_EXPIRES_IN=7d
+DATABASE_URL=YOUR_CONNECTION_STRING_HERE
+APP_URL=YOUR_APP_URL_HERE
 
 BCRYPT_SALT_ROUNDS=10
+NODE_ENV=Development or Production
 
-STRIPE_SECRET_KEY=your_stripe_secret
-STRIPE_WEBHOOK_SECRET=your_webhook_secret
+JWT_ACCESS_SECRET=ACCESS_SECRET
+JWT_REFRESH_SECRET=REFRESH_SECRET
+JWT_ACCESS_EXPIRES_IN=1d
+JWT_REFRESH_EXPIRES_IN=7d
 
-CLIENT_URL=http://localhost:5173
+STRIPE_PRODUCT_ID=YOUR_STRIPE_PRODUCT_KEY
+STRIPE_SECRET_KEY=YOUR_STRIPE_SECRET_KEY
+STRIPE_WEBHOOK_SECRET=YOUR_STRIPE_WEBHOOK_SECRET
 ```
 
 ### 🗄️ Generate Prisma Client
@@ -305,7 +307,7 @@ COMPLETED
 
 You can test the API using:
 
-* Postman
+* Postman (I Added My "POSTMAN" Collection)
 * Thunder Client
 * Insomnia
 
