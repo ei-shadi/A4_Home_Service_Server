@@ -6,12 +6,11 @@ import { USER_ROLE } from "../auth/auth.constant";
 
 const router = Router();
 
-
 router.post(
-    "/",
-    authenticate,
-    authorize(USER_ROLE.CUSTOMER),
-    reviewController.createReview,)
-
+  "/",
+  authenticate,
+  authorize(USER_ROLE.CUSTOMER),
+  reviewController.createReview,
+);
 
 export const reviewRoute = router;

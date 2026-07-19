@@ -277,7 +277,7 @@ export const createBookingIntoDB = async (
   today.setHours(0, 0, 0, 0);
 
   if (bookingDateObj < today) {
-    throw new Error("Booking date cannot be in the past.");
+    throw new Error("Invalid date. Booking date must be today or in the future.");
   }
 
   // =========================

@@ -11,7 +11,6 @@ import { adminRoute } from './module/admin/admin.route';
 import { serviceRoute } from './module/service/services.route';
 import { bookingRoute } from './module/booking/booking.route';
 import { paymentRoute } from './module/payment/payment.route';
-import { stripe } from './lib/stripe';
 import { reviewRoute } from './module/review/review.route';
 
 
@@ -24,7 +23,7 @@ app.use(cors({
     credentials: true,
 }));
 
-
+// Stripe Webhook
 app.use("/api/payments/webhook", express.raw({ type: 'application/json'}))
 
 app.use(express.json());
