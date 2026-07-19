@@ -95,32 +95,70 @@ Customers can book professional technicians, technicians can manage their servic
 <h2 align="center">🗂️ Project Structure</h2>
 
 ```bash
-src
+FixItNow/
 │
-├── app
-│   ├── config
-│   ├── lib
-│   ├── middleware
-│   ├── module
-│   │   ├── auth
-│   │   ├── user
-│   │   ├── technician
-│   │   ├── category
-│   │   ├── service
-│   │   ├── booking
-│   │   ├── payment
-│   │   └── review
-│   ├── routes
-│   ├── shared
-│   └── utils
-│
-├── prisma
-│   ├── migrations
-│   ├── schema
+├── prisma/
+│   ├── migrations/
+│   ├── schema/
+│   ├── seeds/
 │   └── seed.ts
 │
-├── app.ts
-└── server.ts
+├── src/
+│   ├── config/
+│   │   └── index.ts
+│   │
+│   ├── lib/
+│   │   ├── prisma.ts
+│   │   └── stripe.ts
+│   │
+│   ├── middleware/
+│   │   ├── authentication.ts
+│   │   ├── authorization.ts
+│   │   ├── globalErrorHandler.ts
+│   │   └── notFound.ts
+│   │
+│   ├── module/
+│   │   ├── admin/
+│   │   ├── auth/
+│   │   ├── booking/
+│   │   ├── payment/
+│   │   ├── review/
+│   │   ├── service/
+│   │   ├── technician/
+│   │   └── user/
+│   │
+│   ├── shared/
+│   │   ├── types/
+│   │   └── utils/
+│   │
+│   ├── app.ts
+│   ├── index.ts
+│   └── server.ts
+│
+├── .env
+├── .env.example
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+├── prisma.config.ts
+└── README.md
+```
+
+---
+
+### 📁 Module Structure
+
+Each module follows a scalable architecture:
+
+```bash
+module/
+└── booking/
+    ├── booking.controller.ts
+    ├── booking.service.ts
+    ├── booking.route.ts
+    ├── booking.interface.ts
+    └── booking.validation.ts (if needed)
 ```
 
 ---
