@@ -1,0 +1,912 @@
+{
+  "info": {
+    "_postman_id": "ec028aac-adc9-4009-9af3-a155ba962fea",
+    "name": "Home Service",
+    "description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54802319",
+    "_collection_link": "https://go.postman.co/collection/54802319-ec028aac-adc9-4009-9af3-a155ba962fea?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get My Profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Technician 1\",\r\n  \"email\": \"t1@gmail.com\",\r\n  \"phone\": \"+8801712345678\",\r\n  \"profileImage\": \"https://i.pravatar.cc/300?img=12\",\r\n  \"address\": \"House 15, Road 7, Dhanmondi\",\r\n  \"city\": \"Dhaka\",\r\n  \"latitude\": 23.7465,\r\n  \"longitude\": 90.3760\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/users/me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\" : \"u1@gmail.com\",\r\n    \"password\" : \"123456\"    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Customer 1\",\r\n    \"phone\": \"01200000008\",\r\n    \"email\": \"u1@gmail.com\",\r\n    \"password\": \"123456\",\r\n    \"role\": \"Customer\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/refresh-token",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Technician",
+      "item": [
+        {
+          "name": "Get All Services List",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bio\": \"Professional plumber with over 8 years of experience in residential and commercial plumbing.\",\r\n  \"yearsOfExperience\": 8,\r\n  \"experienceDescription\": \"Specialized in pipe installation, bathroom fittings, water leak repair, and emergency plumbing services.\",\r\n  \"availabilityStatus\": \"ONLINE\",\r\n  \"technicianServices\": [\r\n    {\r\n      \"id\": \"c7a40d3b-4ef6-4f3d-93fd-0b75d7b9f001\",\r\n      \"price\": 850,\r\n      \"pricingType\": \"FIXED\",\r\n      \"estimatedDuration\": 90,\r\n      \"serviceImage\": \"https://cdn.fixitnow.com/services/emergency-pipe-repair.jpg\",\r\n      \"status\": \"ACTIVE\"\r\n    },\r\n    {\r\n      \"id\": \"d8b51f5c-5aa7-42a0-b53f-8b7c1e2f0002\",\r\n      \"price\": 1500,\r\n      \"pricingType\": \"FIXED\",\r\n      \"estimatedDuration\": 180,\r\n      \"serviceImage\": \"https://cdn.fixitnow.com/services/bathroom-installation.jpg\",\r\n      \"status\": \"ACTIVE\"\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/services/list",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                "list"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Technician Bookings",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/technician/bookings",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "bookings"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bio\": \"Professional plumber with 8 years of experience.\",\r\n  \"yearsOfExperience\": 8,\r\n  \"experienceDescription\": \"Expert in pipe repair and leak detection.\",\r\n  \"availabilityStatus\": \"ONLINE\",\r\n  \"verificationStatus\": \"APPROVED\",\r\n  \"averageRating\": 4.8,\r\n  \"totalReviews\": 35,\r\n  \"totalCompletedJobs\": 120,\r\n  \"technicianServices\": [\r\n    {\r\n      \"serviceId\": \"beb15d66-13e1-4151-bb87-5d1c1de6a245\",\r\n      \"price\": 850,\r\n      \"pricingType\": \"FIXED\",\r\n      \"estimatedDuration\": 90,\r\n      \"serviceImage\": \"https://cdn.fixitnow.com/services/pipe-repair.jpg\",\r\n      \"status\": \"ACTIVE\"\r\n    },\r\n    {\r\n      \"serviceId\": \"391fe9e6-460e-4980-ac09-70a13d68cf94\",\r\n      \"price\": 1200,\r\n      \"pricingType\": \"FIXED\",\r\n      \"estimatedDuration\": 120,\r\n      \"serviceImage\": \"https://cdn.fixitnow.com/services/leak-detection.jpg\",\r\n      \"status\": \"ACTIVE\"\r\n    },\r\n    {\r\n      \"serviceId\": \"f05f0a40-e597-4915-bbc6-45a8cd5eb3a7\",\r\n      \"price\": 1500,\r\n      \"pricingType\": \"FIXED\",\r\n      \"estimatedDuration\": 180,\r\n      \"serviceImage\": \"https://cdn.fixitnow.com/services/painting.jpg\",\r\n      \"status\": \"ACTIVE\"\r\n    },\r\n    {\r\n      \"serviceId\": \"b9abc983-5e93-4067-a22d-2ef1b692d260\",\r\n      \"price\": 600,\r\n      \"pricingType\": \"FIXED\",\r\n      \"estimatedDuration\": 60,\r\n      \"serviceImage\": \"https://cdn.fixitnow.com/services/cleaning.jpg\",\r\n      \"status\": \"ACTIVE\"\r\n    }\r\n  ]\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/technician/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Availability Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"availabilityStatus\": \"online\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/technician/availability",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "availability"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Booking Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"Completed\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/technician/bookings/8dfa26e1-ab49-4547-ae4c-daf36a16bc30",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "bookings",
+                "8dfa26e1-ab49-4547-ae4c-daf36a16bc30"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\" : \"eis@gmail.com\",\r\n    \"password\" : \"eisadmin\"    \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Gardening\",\r\n  \"icon\": \"https://cdn.example.com/icons/gardening.png\",\r\n  \"description\": \"Garden maintenance and landscaping services.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"categoryId\": \"1fc0da5a-8c04-4a05-823f-21b69650d68a\",\r\n  \"title\": \"Lawn Mowing\",\r\n  \"description\": \"Professional lawn mowing and garden upkeep.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/services",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "services"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Users Status Update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"Active\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/users/9f7140be-fabf-4528-818f-63b5e14b60c6",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "users",
+                "9f7140be-fabf-4528-818f-63b5e14b60c6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Bookings",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/admin/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "admin",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "Get All Technician Services with Query",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/services",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "services"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/categories",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "categories"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Technician",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bio\": \"Professional plumber with over 8 years of experience in residential and commercial plumbing.\",\r\n  \"yearsOfExperience\": 8,\r\n  \"experienceDescription\": \"Specialized in pipe installation, bathroom fittings, water leak repair, and emergency plumbing services.\",\r\n  \"availabilityStatus\": \"ONLINE\",\r\n  \"technicianServices\": [\r\n    {\r\n      \"id\": \"c7a40d3b-4ef6-4f3d-93fd-0b75d7b9f001\",\r\n      \"price\": 850,\r\n      \"pricingType\": \"FIXED\",\r\n      \"estimatedDuration\": 90,\r\n      \"serviceImage\": \"https://cdn.fixitnow.com/services/emergency-pipe-repair.jpg\",\r\n      \"status\": \"ACTIVE\"\r\n    },\r\n    {\r\n      \"id\": \"d8b51f5c-5aa7-42a0-b53f-8b7c1e2f0002\",\r\n      \"price\": 1500,\r\n      \"pricingType\": \"FIXED\",\r\n      \"estimatedDuration\": 180,\r\n      \"serviceImage\": \"https://cdn.fixitnow.com/services/bathroom-installation.jpg\",\r\n      \"status\": \"ACTIVE\"\r\n    }\r\n  ]\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/technicians",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "technicians"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Technician By Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/technicians/01c438c1-6581-400e-8090-788578c9f10a",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "technicians",
+                "01c438c1-6581-400e-8090-788578c9f10a"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Get My Bookings (Logged In User)",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"technicianServiceId\": \"81ca14cb-b194-4b38-a700-fa8a8380d162\",\r\n  \"bookingDate\": \"2026-07-16\",\r\n  \"scheduledStart\": \"2026-07-16T10:00:00.000Z\",\r\n  \"scheduledEnd\": \"2026-07-16T11:30:00.000Z\",\r\n  \"serviceAddress\": \"House 25, Road 7, Dhanmondi, Dhaka\",\r\n  \"latitude\": 23.7465,\r\n  \"longitude\": 90.3760,\r\n  \"notes\": \"Please check the damaged pipe and bring necessary repair tools.\"\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/booking",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "booking"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Booking By Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{base_url}}/api/booking/cb1566c3-2715-47e4-80f4-893ebac2b471",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "booking",
+                "cb1566c3-2715-47e4-80f4-893ebac2b471"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Bookings",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"technicianServiceId\": \"ee3d1234-6fd0-4754-8cae-c3967dfd5216\",\r\n  \"bookingDate\": \"2026-07-22\",\r\n  \"scheduledStart\": \"2026-07-22T10:00:00.000Z\",\r\n  \"scheduledEnd\": \"2026-07-22T11:00:00.000Z\",\r\n  \"serviceAddress\": \"House 25, Road 7, Dhanmondi, Dhaka\",\r\n  \"latitude\": 23.7465,\r\n  \"longitude\": 90.3760,\r\n  \"notes\": \"Deep home cleaning service requested. Please bring necessary cleaning supplies.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/booking",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "booking"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Get Payment Details By Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"technicianServiceId\": \"81ca14cb-b194-4b38-a700-fa8a8380d162\",\r\n  \"bookingDate\": \"2026-07-16\",\r\n  \"scheduledStart\": \"2026-07-16T10:00:00.000Z\",\r\n  \"scheduledEnd\": \"2026-07-16T11:30:00.000Z\",\r\n  \"serviceAddress\": \"House 25, Road 7, Dhanmondi, Dhaka\",\r\n  \"latitude\": 23.7465,\r\n  \"longitude\": 90.3760,\r\n  \"notes\": \"Please check the damaged pipe and bring necessary repair tools.\"\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments/f316a34b-9f63-4c46-b137-ff99ec030d83",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "f316a34b-9f63-4c46-b137-ff99ec030d83"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payment History",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"technicianServiceId\": \"81ca14cb-b194-4b38-a700-fa8a8380d162\",\r\n  \"bookingDate\": \"2026-07-16\",\r\n  \"scheduledStart\": \"2026-07-16T10:00:00.000Z\",\r\n  \"scheduledEnd\": \"2026-07-16T11:30:00.000Z\",\r\n  \"serviceAddress\": \"House 25, Road 7, Dhanmondi, Dhaka\",\r\n  \"latitude\": 23.7465,\r\n  \"longitude\": 90.3760,\r\n  \"notes\": \"Please check the damaged pipe and bring necessary repair tools.\"\r\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bookingId\": \"8dfa26e1-ab49-4547-ae4c-daf36a16bc30\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments/checkout-session",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "checkout-session"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Create Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{supabase_service_role_api_key_0pw2}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bookingId\": \"8dfa26e1-ab49-4547-ae4c-daf36a16bc30\",\r\n  \"rating\": 4.5,\r\n  \"comment\": \"The technician was very professional and completed the work perfectly.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reviews",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reviews"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Server Response",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"name\": \"Shahadat Hossain\",\r\n    \"email\": \"lavnai@gmail.com\",\r\n    \"password\": \"12345\",\r\n    \"age\": 30 \r\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}",
+          "host": [
+            "{{base_url}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://template.postman-echo.com"
+    },
+    {
+      "key": "supabase_service_role_api_key_0pw2",
+      "secret": true
+    }
+  ]
+}
