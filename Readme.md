@@ -18,6 +18,15 @@ Customers can book professional technicians, technicians can manage their servic
 
 ---
 
+<h2 align="center">🌐 Live API</h2>
+
+🎯 **Production Server**
+
+👉 **Visit Live API**  
+https://homeservice-eis.vercel.app/
+
+---
+
 <h2 align="center">🚀 Features</h2>
 
 ### 👤 Customer Features
