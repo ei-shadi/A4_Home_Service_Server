@@ -1,6 +1,10 @@
 # Node.js Dependencies
 node_modules
 dist
+api
+
+# Seed Files
+/prisma/seeds/
 
 # Environment Files
 .env
