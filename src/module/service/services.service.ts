@@ -1,6 +1,6 @@
 import { prisma } from "../../lib/prisma";
 
-// Get All Services From DBconst getAllServicesFromDB = async () => {
+// Get All Services From DB
 const getAllServicesFromDB = async () => {
   const services = await prisma.service.findMany({
     where: {
