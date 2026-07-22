@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "rootDir": "./src",
-    "outDir": "./api",
+    "outDir": "./dist",
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ES2023",
@@ -17,6 +16,6 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "api"]
+  "include": ["src/**/*", "*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
